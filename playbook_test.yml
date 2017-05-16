@@ -1,0 +1,16 @@
+---
+- hosts: local
+  vars:
+    input: ['ansiblehash123']
+  tasks:
+    - name: Redis command
+      anchor_redis:
+        db: 0
+        command: hmget
+        hashkey: 'ansiblehash123'
+        hashfield: '{{input}}' 
+      register: values
+
+    - name: debug redis command
+      debug:
+        var: values 

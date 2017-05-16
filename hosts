@@ -1,0 +1,9 @@
+[local]
+localhost ansible_connection=local
+
+[linux]
+10.228.106.99
+10.103.117.61
+10.228.183.86
+10.103.117.78
+10.228.102.14

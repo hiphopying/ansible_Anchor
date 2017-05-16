@@ -1,0 +1,28 @@
+---
+- hosts: linux
+  gather_facts: no
+  remote_user: root
+  tasks:
+    - name: setup
+      setup:
+        gather_subset: network
+
+- hosts: local
+  tasks:
+    - name: Update Redis
+      anchor_redis:
+        db: 0
+        command: set
+        key: "{{hostvars[item]['ansible_default_ipv4']['macaddress']}}"
+        value: "{{hostvars[item]['ansible_default_ipv4']['address']}}" 
+      with_items:
+        - "{{groups['linux']}}"
+      when:
+        - hostvars[item]['ansible_default_ipv4'] is defined
+
+
+    - name: debug
+      debug:
+        var: hostvars[item]['ansible_default_ipv4']['macaddress']
+      with_items:
+        - "{{groups['linux']}}"
