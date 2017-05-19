@@ -15,7 +15,7 @@ Parameters:
  login_host=dict(default='localhost') # redis server IP address
  login_port=dict(default=6379, type='int') # redis server login port
  db=dict(default=None, type='int') # redis database number to connect
- command=dict(default=None, choices=['set', 'get', 'hmset', 'hmget']) # supported commands in this module
+ command=dict(default=None, choices=['set', 'get', 'hmset', 'hmget']) # redis command to use
  key=dict(default=None) # set/get command key
  value=dict(default=None) # set command value
  hashkey=dict(default=None) # hmset/hmget command key
