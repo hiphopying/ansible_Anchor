@@ -13,15 +13,15 @@ This module includes some redis operations for ansible user to interact with red
 Examples:
 
 Redis 'set' command:
-```
+```python
     - hosts: local
       tasks:
         - name: Update mac:ip pair to redis after facts been gathered for linux group of hosts.
           anchor_redis:
             db: 0 # redis db number
             command: set # redis command using set
-            key: "{{hostvars[item]['ansible_default_ipv4']['macaddress']}}" 
-            value: "{{hostvars[item]['ansible_default_ipv4']['address']}}"
+            key: "{{hostvars[item]['ansible_default_ipv4']['macaddress']}}" # key param for set cmd
+            value: "{{hostvars[item]['ansible_default_ipv4']['address']}}" # value param for set cmd
           with_items:
             - "{{groups['linux']}}"
           when:
