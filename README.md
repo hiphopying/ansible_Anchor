@@ -12,15 +12,15 @@ This module includes some redis operations for ansible user to interact with red
 
 Parameters:
 ```python
- login_host=dict(default='localhost')
- login_port=dict(default=6379, type='int')
- db=dict(default=None, type='int')
- command=dict(default=None, choices=['set', 'get', 'hmset', 'hmget'])
- key=dict(default=None)
- value=dict(default=None)
- hashkey=dict(default=None)
- hashfield=dict(default=None, type='list')
- hashvalue=dict(default=None, type='dict')
+ login_host=dict(default='localhost') # redis server IP address
+ login_port=dict(default=6379, type='int') # redis server login port
+ db=dict(default=None, type='int') # redis database number to connect
+ command=dict(default=None, choices=['set', 'get', 'hmset', 'hmget']) # supported commands in this module
+ key=dict(default=None) # set/get command key
+ value=dict(default=None) # set command value
+ hashkey=dict(default=None) # hmset/hmget command key
+ hashfield=dict(default=None, type='list') # hmget command fields (a list)
+ hashvalue=dict(default=None, type='dict') # hmset command fields and values (a dictionary)
 ```
 
 Examples:
