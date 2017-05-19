@@ -30,9 +30,9 @@ Redis 'set' command:
     - hosts: local
       tasks:
         - name: Update mac:ip pair to redis after facts been gathered for linux group of hosts.
-          anchor_redis:
-            db: 0 # redis db number
-            command: set # redis command using set
+          anchor_redis: # use anchor_redis.py module.
+            db: 0 # redis db param
+            command: set # redis command param is 'set'
             key: "{{hostvars[item]['ansible_default_ipv4']['macaddress']}}" # key param for set cmd
             value: "{{hostvars[item]['ansible_default_ipv4']['address']}}" # value param for set cmd
           with_items:
