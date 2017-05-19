@@ -10,6 +10,19 @@ This playbook gather mac:ip mappings from running servers and write mac:ip as ke
 ### anchor_redis.py
 This module includes some redis operations for ansible user to interact with redis database.
 
+Parameters:
+```python
+ login_host=dict(default='localhost')
+ login_port=dict(default=6379, type='int')
+ db=dict(default=None, type='int')
+ command=dict(default=None, choices=['set', 'get', 'hmset', 'hmget'])
+ key=dict(default=None)
+ value=dict(default=None)
+ hashkey=dict(default=None)
+ hashfield=dict(default=None, type='list')
+ hashvalue=dict(default=None, type='dict')
+```
+
 Examples:
 
 Redis 'set' command:
