@@ -1,16 +1,26 @@
 ---
-- hosts: local
-  vars:
-    input: ['ansiblehash123']
+- hosts: test
+  remote_user: root
   tasks:
-    - name: Redis command
-      anchor_redis:
-        db: 0
-        command: hmget
-        hashkey: 'ansiblehash123'
-        hashfield: '{{input}}' 
-      register: values
+    - name: test 
+      anchor_fact:
+        ansible_facts: "{{hostvars[inventory_hostname]}}"
+      register: facts
 
-    - name: debug redis command
+    - name: debug
       debug:
-        var: values 
+        var: facts['value']
+
+- hosts: local
+  tasks:
+    - name: update redis
+      anchor_redis:
+        db: 1
+        command: hmset
+        hashkey: "{{hostvars[item]['facts']['value']['os_ip']}}"
+        hashvalue: "{{hostvars[item]['facts']['value']}}"
+      with_items:
+        - "{{groups['test']}}"
+      when:
+        - hostvars[item]['facts']['value'] is defined
+

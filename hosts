@@ -1,5 +1,11 @@
 [local]
 localhost ansible_connection=local
+[test]
+10.103.117.76 # Redhat
+#10.228.106.99 # Suse
+#10.228.182.143 # citrix
+#10.228.107.103 # vmware
+#10.228.102.224 # solaris
 
 [linux]
 10.228.106.99
