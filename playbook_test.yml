@@ -1,26 +1,9 @@
 ---
 - hosts: test
   remote_user: root
-  tasks:
-    - name: test 
-      anchor_fact:
-        ansible_facts: "{{hostvars[inventory_hostname]}}"
-      register: facts
-
-    - name: debug
-      debug:
-        var: facts['value']
+  roles:
+    - anchor_test
 
 - hosts: local
-  tasks:
-    - name: update redis
-      anchor_redis:
-        db: 1
-        command: hmset
-        hashkey: "{{hostvars[item]['facts']['value']['os_ip']}}"
-        hashvalue: "{{hostvars[item]['facts']['value']}}"
-      with_items:
-        - "{{groups['test']}}"
-      when:
-        - hostvars[item]['facts']['value'] is defined
-
+  roles:
+    - {role: anchor_redis, taskname: 'updateFacts'}

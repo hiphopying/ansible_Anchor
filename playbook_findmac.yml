@@ -1,32 +1,9 @@
 ---
-# Gather Linux/Solaris host group's facts including mac and ip addresses. Write all mac:ip pairs to redis db0.
-- hosts: linux
-  gather_facts: no
+- hosts: test
   remote_user: root
-  tasks:
-    - name: setup
-      setup:
-        gather_subset: network
-
-- hosts: local
-  tasks:
-    - name: Update Redis
-      anchor_redis:
-        db: 0
-        command: set
-        key: "{{hostvars[item]['ansible_default_ipv4']['macaddress']}}"
-        value: "{{hostvars[item]['ansible_default_ipv4']['address']}}" 
-      with_items:
-        - "{{groups['linux']}}"
-      when:
-        - hostvars[item]['ansible_default_ipv4'] is defined
+  gather_facts: no
+  roles:
+    - linux_facts
+    - {role: anchor_redis, taskname: 'updateMacip'}
 
 
-  #    - name: debug
-  #    debug:
-  #      var: hostvars[item]['ansible_default_ipv4']['macaddress']
-  #    with_items:
-  #      - "{{groups['linux']}}"
-
-
-# Put your plays gathering vmware mac and ip addresses, and redis tasks below.

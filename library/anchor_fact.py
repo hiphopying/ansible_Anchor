@@ -68,6 +68,10 @@ def filter_ansible_fact(ansible_facts):
 def append_hba_info(filtered_facts):
     return filtered_facts
 
+def append_additional_info(filtered_facts):
+    pass
+    return filtered_facts
+
 def main():
     module = AnsibleModule(
         argument_spec = dict(
