@@ -5,7 +5,7 @@
 
 - hosts: local
   roles:
-    - {role: anchor_redis, taskname: 'updateMacip_linux'} # This covers both Linux/Solaris hosts
+    - {role: anchor_redis, taskname: 'updateMacip_linsol'} # This covers both Linux/Solaris hosts
 
 #- hosts: test
 #  roles:
