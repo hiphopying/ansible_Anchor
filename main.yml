@@ -1,6 +1,14 @@
 ---
 - hosts: test
+  remote_user: root
+  gather_facts: yes
+
+- hosts: local
   roles:
-    - linux_facts
-    - esxi_facts
-    - render
+    - {role: anchor_redis, taskname: 'updateMacip_linux'} # This covers both Linux/Solaris hosts
+
+#- hosts: test
+#  roles:
+#    - linux_facts
+#    - esxi_facts
+#    - render

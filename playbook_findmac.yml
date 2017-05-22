@@ -1,9 +1,10 @@
 ---
 - hosts: test
   remote_user: root
-  gather_facts: no
+  gather_facts: yes
+
+- hosts: local
   roles:
-    - linux_facts
-    - {role: anchor_redis, taskname: 'updateMacip'}
+    - {role: anchor_redis, taskname: 'updateMacip_linux'} # This covers both Linux/Solaris hosts
 
 
