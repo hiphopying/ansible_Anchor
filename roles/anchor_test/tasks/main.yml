@@ -1,0 +1,10 @@
+---
+- name: test 
+  anchor_fact:
+    ansible_facts: "{{hostvars[inventory_hostname]}}"
+  register: facts
+
+- name: debug
+  debug:
+    var: facts['value']
+

@@ -1,0 +1,28 @@
+---
+- name: updateFacts
+  anchor_redis:
+    login_host: 'localhost'      
+    login_port: 6379
+    db: 1
+    command: hmset
+    hashkey: "{{hostvars[item]['facts']['value']['os_ip']}}"
+    hashvalue: "{{hostvars[item]['facts']['value']}}"
+  with_items:
+    - "{{groups['test']}}"
+  when:
+    - taskname == 'updateFacts'
+    - hostvars[item]['facts']['value'] is defined
+
+- name: Update Mac:IP pair in Redis
+  anchor_redis:
+    login_host: 'localhost'      
+    login_port: 6379
+    db: 0
+    command: set
+    key: "{{hostvars[item]['ansible_default_ipv4']['macaddress']}}"
+    value: "{{hostvars[item]['ansible_default_ipv4']['address']}}" 
+  with_items:
+    - "{{groups['linux']}}"
+  when:
+    - taskname == 'updateMacip'
+    - hostvars[item]['ansible_default_ipv4'] is defined

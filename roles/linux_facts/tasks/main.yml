@@ -1,0 +1,6 @@
+---
+# Gather Linux/Solaris host group's facts including mac and ip addresses. Write all mac:ip pairs to redis db0.
+- name: setup
+  setup:
+    gather_subset: network
+
