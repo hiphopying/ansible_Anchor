@@ -1,0 +1,6 @@
+---
+- hosts: test
+  roles:
+    - linux_facts
+    - esxi_facts
+    - render

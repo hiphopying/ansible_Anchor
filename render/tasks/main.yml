@@ -1,0 +1,6 @@
+---
+- name: Get IP MAC records from REDIS
+
+- name: Render, copy to DHCP server
+
+- name: Restart DHCP services
