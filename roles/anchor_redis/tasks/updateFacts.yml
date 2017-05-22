@@ -1,0 +1,12 @@
+- name: updateFacts
+  anchor_redis:
+    login_host: 'localhost'      
+    login_port: 6379
+    db: 1
+    command: hmset
+    hashkey: "{{hostvars[item]['facts']['value']['os_ip']}}"
+    hashvalue: "{{hostvars[item]['facts']['value']}}"
+  with_items:
+    - "{{groups['test']}}"
+  when:
+    - hostvars[item]['facts']['value'] is defined
