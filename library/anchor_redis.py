@@ -39,6 +39,9 @@ EXAMPLES = '''
 
 '''
 
+REDIS_HOST = '10.228.104.198'
+REDIS_PORT = '32780'
+
 try:
     import redis
 except ImportError:
@@ -87,8 +90,8 @@ def anch_update(client, cmd, **kwargs):
 def main():
     module = AnsibleModule(
         argument_spec = dict(
-            login_host=dict(default='localhost'),
-            login_port=dict(default=6379, type='int'),
+            login_host=dict(default=REDIS_HOST),
+            login_port=dict(default=REDIS_PORT, type='int'),
             db=dict(default=None, type='int'),
             command=dict(default=None, choices=['set', 'get', 'hmset', 'hmget']),
             key=dict(default=None),
