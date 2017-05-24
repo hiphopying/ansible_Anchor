@@ -1,11 +1,16 @@
 ---
 - hosts: test
   remote_user: root
-  gather_facts: yes
+  gather_facts: no 
+  roles:
+    - {role: linux_facts} # Actually this gathers facts for all hosts.
+      # Gather additional facts for ESXi hosts.
+    - {role: esxi_facts, when: "hostvars[inventory_hostname]['ansible_system'] == 'VMkernel'"}
 
 - hosts: local
-  roles:
+  roles: # Write ip:mac pairs to redis database.
     - {role: anchor_redis, taskname: 'updateMacip_linsol'} # This covers both Linux/Solaris hosts
+    - {role: anchor_redis, taskname: 'updateMacip_vmware'} # This covers vmware hosts
 
 #- hosts: test
 #  roles:

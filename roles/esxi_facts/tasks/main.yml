@@ -1,1 +1,13 @@
 ---
+- name: gather vmk0 ip address
+  shell:
+    esxcli network ip interface ipv4 get |grep vmk0| awk '{print $2}'
+  register: vmk0_ip
+
+- name: gather mac address if vmk0 ip is the same as managementIP
+  shell: 
+    esxcli network ip interface list |grep 'MAC Address'|awk '{print $3}'
+  register: hostmac
+  when: vmk0_ip.stdout == hostvars[inventory_hostname].inventory_hostname
+
+

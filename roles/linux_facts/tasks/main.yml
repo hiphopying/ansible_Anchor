@@ -1,6 +1,7 @@
 ---
 - name: setup
   setup:
-  when:
-    - hostvars[inventory_host]['ansible_system'] == 'Linux'
+    gather_subset: all
+  async: 30
+  poll: 10
 
