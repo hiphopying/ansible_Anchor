@@ -10,3 +10,4 @@
     - "{{groups['test']}}"
   when:
     - hostvars[item]['ansible_default_ipv4'] is defined
+    - hostvars[item]['ansible_default_ipv4']['address'] != '0.0.0.0'
