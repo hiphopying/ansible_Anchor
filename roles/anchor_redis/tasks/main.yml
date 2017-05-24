@@ -5,3 +5,6 @@
 - include: updateMacip_linsol.yml
   when:
     - "'updateMacip_linsol' in taskname"
+- include: updateMacip_vmware.yml
+  when:
+    - "'updateMacip_vmware' in taskname"

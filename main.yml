@@ -3,9 +3,14 @@
   remote_user: root
   gather_facts: yes
 
+- hosts: test
+  roles:
+    - {role: esxi_facts, when: "hostvars[inventory_hostname]['ansible_system'] == 'VMkernel'"}
+
 - hosts: local
   roles:
     - {role: anchor_redis, taskname: 'updateMacip_linsol'} # This covers both Linux/Solaris hosts
+    - {role: anchor_redis, taskname: 'updateMacip_vmware'}
 
 #- hosts: test
 #  roles:
