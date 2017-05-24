@@ -41,6 +41,9 @@ EXAMPLES = '''
 
 REDIS_HOST = '10.228.104.198'
 REDIS_PORT = '32780'
+REDIS_GET = ['get', 'keys',  'hmget']
+REDIS_SET = ['set', 'hmset']
+REDIS_ACTIONS = REDIS_GET + REDIS_SET
 
 try:
     import redis
@@ -66,6 +69,8 @@ def anch_update(client, cmd, **kwargs):
             return client.get(key)
         except Exception:
             raise
+    elif cmd == "keys":
+        return client.keys()
     elif cmd == "hmset":
         assert kwargs['hashkey'] != None
         assert kwargs['hashvalue'] != None
@@ -93,7 +98,7 @@ def main():
             login_host=dict(default=REDIS_HOST),
             login_port=dict(default=REDIS_PORT, type='int'),
             db=dict(default=None, type='int'),
-            command=dict(default=None, choices=['set', 'get', 'hmset', 'hmget']),
+            command=dict(default=None, choices=REDIS_ACTIONS),
             key=dict(default=None),
             value=dict(default=None),
             hashkey=dict(default=None),
@@ -110,8 +115,7 @@ def main():
     login_port = module.params['login_port']
     db = module.params['db']
     try:
-        pool = redis.ConnectionPool(host=login_host, port=login_port, db=db)
-        r = redis.Redis(connection_pool=pool)
+        r = redis.StrictRedis(host=login_host, port=login_port, db=db)
         r.ping()
     except Exception:
        e = get_exception()
@@ -125,8 +129,8 @@ def main():
     hashvalue = module.params['hashvalue']
     
     result = anch_update(r, command, key=key, value=value, hashkey=hashkey,
-                   hashfield=hashfield, hashvalue=hashvalue) 
-    if result and command in ['get', 'hmget']:
+                   hashfield=hashfield, hashvalue=hashvalue)
+    if result and command in REDIS_GET:
         module.exit_json(changed=False, values=result)
     else:
         module.exit_json(changed=True)
