@@ -1,0 +1,8 @@
+- name: Update arpscan result with ip:mac pair in redis
+  anchor_redis:
+    db: 0
+    command: hmset
+    hashkey: dhcpipmac
+    hashvalue: "{{hostvars[item]['vlanip']['results'] | arpscanToDict(hostvars[item]['vlanmac']['results'])}}"
+  with_items:
+    - "{{groups['arpscan']}}"

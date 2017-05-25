@@ -1,0 +1,9 @@
+---
+- hosts: arpscan
+  remote_user: root
+  roles:
+    - arpscan
+
+- hosts: local
+  roles:
+    - {role: anchor_redis, taskname: ['updateArpscan']}
