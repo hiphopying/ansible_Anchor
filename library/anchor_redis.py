@@ -41,7 +41,7 @@ EXAMPLES = '''
 
 REDIS_HOST = '10.228.104.198'
 REDIS_PORT = '32780'
-REDIS_GET = ['get', 'keys',  'hmget']
+REDIS_GET = ['get', 'keys',  'hmget', 'hkeys']
 REDIS_SET = ['set', 'hmset']
 REDIS_ACTIONS = REDIS_GET + REDIS_SET
 
@@ -70,7 +70,16 @@ def anch_update(client, cmd, **kwargs):
         except Exception:
             raise
     elif cmd == "keys":
-        return client.keys()
+        try:
+            return client.keys()
+        except Exception:
+            raise
+    elif cmd == "hkeys":
+        assert kwargs['hashkey'] != None
+        try:
+            return client.hkeys()
+        except Exception:
+            raise
     elif cmd == "hmset":
         assert kwargs['hashkey'] != None
         assert kwargs['hashvalue'] != None
