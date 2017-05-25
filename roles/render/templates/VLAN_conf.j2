@@ -1,0 +1,18 @@
+subnet 10.228.{{ item }}.0 netmask 255.255.255.0 {
+        range 10.228.{{ item }}.250 10.228.{{ item }}.254;
+        option subnet-mask 255.255.255.0;
+        option broadcast-address 10.228.{{ item }}.255;
+        option routers 10.228.{{ item }}.1;
+}
+
+{% for ip, mac in records['values'].iteritems() %}
+    {% if ip|subnet(item) %}
+
+host {{ ip | hostname }}{
+   hardware ethernet {{ mac }};
+   fixed-address {{ ip }};
+   option host-name {{ ip | hostname }};
+}
+
+    {% endif %}
+{% endfor %}

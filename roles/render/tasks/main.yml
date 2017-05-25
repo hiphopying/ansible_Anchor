@@ -1,6 +1,12 @@
 ---
-- name: Get IP MAC records from REDIS
+  - name: Get IP MAC records from REDIS
+    register: records
+    anchor_redis:
+      db: 0
+      command: getall
 
-- name: Render, copy to DHCP server
-
-- name: Restart DHCP services
+  - name: render
+    template:
+      src: VLAN_conf.j2
+      dest: /vagrant/VLAN{{ item }}.conf
+    with_items: "{{ VLAN }}"
