@@ -108,3 +108,5 @@ ENV/
 
 # for ansible
 *.retry
+
+conf/*

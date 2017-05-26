@@ -1,0 +1,13 @@
+---
+
+- hosts: localhost
+  roles:
+    - render
+
+- hosts: dhcp_server
+  tasks:
+    - copy:
+        src: "{{ item }}"
+        dest: "/etc/ansible_test/"
+      with_fileglob:
+        - "conf/*"

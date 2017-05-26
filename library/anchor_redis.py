@@ -41,7 +41,7 @@ EXAMPLES = '''
 
 REDIS_HOST = '10.228.104.198'
 REDIS_PORT = '32780'
-REDIS_GET = ['get', 'keys',  'hmget', 'hkeys']
+REDIS_GET = ['get', 'getall',  'hmget']
 REDIS_SET = ['set', 'hmset']
 REDIS_ACTIONS = REDIS_GET + REDIS_SET
 
@@ -69,9 +69,9 @@ def anch_update(client, cmd, **kwargs):
             return client.get(key)
         except Exception:
             raise
-    elif cmd == "keys":
+    elif cmd == "getall":
         try:
-            return client.keys()
+            return client.hgetall('dhcpipmac')
         except Exception:
             raise
     elif cmd == "hkeys":
