@@ -3,7 +3,8 @@
     register: records
     anchor_redis:
       db: 0
-      command: getall
+      command: hgetall
+      key:  dhcpipmac
 
   - name: render
     template:
