@@ -1,0 +1,5 @@
+---
+
+- hosts: localhost
+  roles: # Write ip:mac pairs to redis database.
+    - {role: anchor_redis, taskname: ['updateMacip_linsol', 'updateMacip_vmware']} # This covers Linux/Solaris/vmware hosts

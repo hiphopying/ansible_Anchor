@@ -1,7 +1,7 @@
 - name: Update vmware hosts' Mac:IP pair in Redis
   anchor_redis:
-    login_host: 'localhost'      
-    login_port: 6379
+#   login_host: 'localhost'      
+#   login_port: 6379
     db: 0
     command: set
     key: "{{hostvars[item]['vmk0_ip']['stdout']}}"
@@ -9,4 +9,5 @@
   with_items:
     - "{{groups['test']}}"
   when:
-    - hostvars[item]['hostmac'] is defined
+    - hostvars[item]['hostmac'] is defined      
+    - hostvars[item]['hostmac']['stdout'] is defined

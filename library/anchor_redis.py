@@ -70,7 +70,16 @@ def anch_update(client, cmd, **kwargs):
         except Exception:
             raise
     elif cmd == "getall":
-        return client.hgetall('dhcpipmac')
+        try:
+            return client.hgetall('dhcpipmac')
+        except Exception:
+            raise
+    elif cmd == "hkeys":
+        assert kwargs['hashkey'] != None
+        try:
+            return client.hkeys()
+        except Exception:
+            raise
     elif cmd == "hmset":
         assert kwargs['hashkey'] != None
         assert kwargs['hashvalue'] != None
