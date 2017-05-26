@@ -8,5 +8,5 @@
   - name: render
     template:
       src: VLAN_conf.j2
-      dest: /vagrant/VLAN{{ item }}.conf
+      dest: conf/VLAN{{ item }}.conf
     with_items: "{{ VLAN }}"
