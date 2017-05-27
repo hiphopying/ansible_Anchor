@@ -11,3 +11,6 @@
         dest: "/etc/"
       with_fileglob:
         - "conf/*"
+    - service:
+        name: dhcpd
+        state: restarted
