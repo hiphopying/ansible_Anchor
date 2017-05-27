@@ -7,6 +7,7 @@ subnet 10.228.{{ item }}.0 netmask 255.255.255.0 {
 
 {% for ip, mac in records['values'].iteritems() %}
     {% if ip|subnet(item) %}
+        {% if ip in reserved_m_ip %}
 
 host {{ ip | hostname }}{
    hardware ethernet {{ mac }};
@@ -14,5 +15,6 @@ host {{ ip | hostname }}{
    option host-name {{ ip | hostname }};
 }
 
+        {% endif %}
     {% endif %}
 {% endfor %}
