@@ -8,6 +8,9 @@
   tasks:
     - copy:
         src: "{{ item }}"
-        dest: "/etc/ansible_test/"
+        dest: "/etc/"
       with_fileglob:
         - "conf/*"
+    - service:
+        name: dhcpd
+        state: restarted
