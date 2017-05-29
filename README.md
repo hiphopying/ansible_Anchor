@@ -2,8 +2,6 @@
 
 This repository includes an ansible automation tool to scan server mac address in given network range, and render large number of host\' hostname based on pre-defined rules via DHCP.
 
-**Advantages
-
 **Fast scan speed**: It uses arpscan which finish scanning an given subnet with 200~300 hosts in few seconds 
 
 **High discovery rate**: It collects server mac with high successfully rate, regardless of OS, login, firewall.
