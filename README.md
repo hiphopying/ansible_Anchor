@@ -1,17 +1,17 @@
 # ansible_Anchor
 
-This repository includes an ansible automation tool to scan server mac address in given network range, and render large number of host\' hostname based on pre-defined rules via DHCP.
+This repository includes an ansible automation tool to scan server mac address in given network range, and render hostname of large number of hosts based on pre-defined rules via DHCP.
 
-**Fast scan speed**: It uses arpscan which finish scanning an given subnet with 200~300 hosts in few seconds 
+**Fast scan speed**: It uses arpscan which finish scanning an given subnet with 200~300 hosts in few seconds.
 
 **High discovery rate**: It collects server mac with high successfully rate, regardless of OS, login, firewall.
 
-**Customization allowed**: Both user defined, and auto generated config files are allowed in DHCP for each host
+**Customization allowed**: Both user defined, and auto generated config files are allowed in DHCP server for individual host.
 
 ## Architecture:
 - ARPscan VM:
 
-    A VM which has access to all the required subnets, and send ARP calls to scan and collect server mac
+    A VM which has access to all the required subnets, and send ARP calls to scan and collect server mac info.
 - Redis Database:
 
     Store all the IP:mac pairs collected from ARPscan VM
