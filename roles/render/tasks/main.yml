@@ -9,5 +9,5 @@
   - name: render
     template:
       src: VLAN_conf.j2
-      dest: conf/VLAN{{ item }}.conf
+      dest: conf/VLAN{{ item }}_dhcp.conf
     with_items: "{{ VLAN }}"
