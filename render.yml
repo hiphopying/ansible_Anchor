@@ -5,10 +5,15 @@
     - render
 
 - hosts: dhcp_server
+  remote_user: root
   tasks:
+    - name: backup dhcp config files
+      shell: tar zcvf /home/backup/dhcp/`date +%Y-%m-%d-%H-%M`.tar.gz VLAN*
+      args:
+        chdir: /var/lib/dhcp/etc
     - copy:
         src: "{{ item }}"
-        dest: "/etc/"
+        dest: "/var/lib/dhcp/etc"
       with_fileglob:
         - "conf/*"
     - service:
