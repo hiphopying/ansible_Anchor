@@ -5,7 +5,6 @@
     - render
 
 - hosts: dhcp_server
-  remote_user: root
   tasks:
     - name: backup dhcp config files
       shell: tar zcvf /home/backup/dhcp/`date +%Y-%m-%d-%H-%M`.tar.gz VLAN*
