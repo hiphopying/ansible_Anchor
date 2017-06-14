@@ -18,7 +18,7 @@ localhost ansible_connection=local
 #10.228.[220:221].[11:249]
 
 [dhcp_server]
-10.228.104.80 #ansible_ssh_pass=Ka1aka!
+10.228.104.80
 
 [arpscan]
 10.228.104.162 eth1=102 eth2=103 eth0=104 eth3=105 eth6=106 eth4=107 eth5=108
