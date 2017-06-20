@@ -1,19 +1,19 @@
-- name: Arpscan get ip
-  shell: arp-scan -I {{item}} 10.228.{{hostvars[inventory_hostname][item]}}.0/24 | egrep '([0-9]+\.){3}' | awk '{print $1}'
-  register: vlanip
+- name: Arpscan get ip mac
+  shell: arp-scan -I {{item}} 10.228.{{hostvars[inventory_hostname][item]}}.0/24 | egrep '([0-9]+\.){3}' | awk '{print $1" "$2}'
+  register: vlanipmac
   with_items:
     - "{{ansible_interfaces}}"
   when:
     - item != 'lo'
 
-- name: Arpscan get mac
-  shell: arp-scan -I {{item}} 10.228.{{hostvars[inventory_hostname][item]}}.0/24 | egrep '([0-9]+\.){3}' | awk '{print $2}'
-  register: vlanmac
-  with_items:
-    - "{{ansible_interfaces}}"
-  when:
-    - item != 'lo'
+  #- name: Arpscan get mac
+  #shell: arp-scan -I {{item}} 10.228.{{hostvars[inventory_hostname][item]}}.0/24 | egrep '([0-9]+\.){3}' | awk '{print $2}'
+  #register: vlanmac
+  #with_items:
+  #  - "{{ansible_interfaces}}"
+  #when:
+  #  - item != 'lo'
 
-  #- name: debug
-  #debug:
-  #  var: hostvars[inventory_hostname]
+- name: debug
+  debug:
+    var: hostvars[inventory_hostname]

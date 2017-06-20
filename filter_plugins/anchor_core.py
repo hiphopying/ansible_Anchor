@@ -1,12 +1,9 @@
-def dictzip(lst1, lst2):
-    return dict(zip(lst1,lst2))
-
-def arpscanToDict(result1, result2):
+def arpscanToDict(results):
     result = dict()
-    for i in range(len(result1)):
-        if result1[i]['item'] != 'lo' and result1[i]['stdout_lines'] != []:
-            result.update(dictzip(result1[i]['stdout_lines'],
-                              result2[i]['stdout_lines']))
+    for i in range(len(results)):
+        if results[i]['item'] != 'lo' and results[i]['stdout_lines'] != []:
+            for line in results[i]['stdout_lines']:
+                result[line.split()[0]] = line.split()[1]
     return result
 
 class FilterModule(object):
@@ -15,7 +12,6 @@ class FilterModule(object):
     '''
     def filters(self):
         return {
-            'dictzip': dictzip,
             'arpscanToDict': arpscanToDict
         }
 

@@ -3,6 +3,11 @@
     db: 0
     command: hmset
     hashkey: dhcpipmac
-    hashvalue: "{{hostvars[item]['vlanip']['results'] | arpscanToDict(hostvars[item]['vlanmac']['results'])}}"
+    hashvalue: "{{hostvars[item]['vlanipmac']['results'] | arpscanToDict}}"
   with_items:
     - "{{groups['arpscan']}}"
+
+- name: debug
+  debug:
+    var: hostvars[inventory_hostname]
+

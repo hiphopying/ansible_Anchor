@@ -1,4 +1,7 @@
 ---
+  - name: Load var ip inventory
+    include_vars: ip_inventory.yml
+
   - name: Get IP MAC records from REDIS
     register: records
     anchor_redis:
