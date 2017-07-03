@@ -2,12 +2,10 @@
   - name: Load var ip inventory
     include_vars: ip_inventory.yml
 
-  - name: Get IP MAC records from REDIS
+  - name: Get ready for render entries 
     register: records
-    anchor_redis:
-      db: 0
-      command: hgetall
-      key:  dhcpipmac
+    render_entry:
+      inventory: "{{reserved_m_ip}}"
 
   - name: render
     template:

@@ -1,0 +1,4 @@
+---
+- include: dhcp_ip_inventory.yml
+  when: 
+    - "'dhcp' in taskname"

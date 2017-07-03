@@ -40,7 +40,8 @@ EXAMPLES = '''
 '''
 
 REDIS_HOST = '10.228.104.198'
-REDIS_PORT = '32780'
+REDIS_PORT = '32782'
+REDIS_DB = 0
 REDIS_GET = ['get', 'hgetall',  'hmget']
 REDIS_SET = ['set', 'hmset']
 REDIS_ACTIONS = REDIS_GET + REDIS_SET
@@ -108,7 +109,7 @@ def main():
         argument_spec = dict(
             login_host=dict(default=REDIS_HOST),
             login_port=dict(default=REDIS_PORT, type='int'),
-            db=dict(default=None, type='int'),
+            db=dict(default=REDIS_DB, type='int'),
             command=dict(default=None, choices=REDIS_ACTIONS),
             key=dict(default=None),
             value=dict(default=None),
