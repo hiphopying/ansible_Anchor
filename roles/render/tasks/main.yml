@@ -2,13 +2,25 @@
   - name: Load var ip inventory
     include_vars: ip_inventory.yml
 
-  - name: Get ready for render entries 
+  - name: Get ready for render entries
     register: records
     render_entry:
       inventory: "{{reserved_m_ip}}"
+      login_port: "32768"
+    delegate_to: 127.0.0.1
 
-  - name: render
+  - name: Backup dhcp config files
+    shell: tar zcvf /home/backup/dhcp/`date +%Y-%m-%d-%H-%M`.tar.gz VLAN*
+    args:
+      chdir: /var/lib/dhcp/etc
+
+  - name: Rende to DHCP server
     template:
       src: VLAN_conf.j2
-      dest: conf/VLAN{{ item }}_dhcp.conf
+      dest: /var/lib/dhcp/etc/VLAN{{ item }}_dhcp.conf
     with_items: "{{ VLAN }}"
+
+  - name: Restart dhcpd
+    service:
+      name: dhcpd
+      state: restarted
