@@ -40,7 +40,7 @@ EXAMPLES = '''
 '''
 
 REDIS_HOST = '10.228.104.198'
-REDIS_PORT = '32782'
+REDIS_PORT = '32768'
 REDIS_DB = 0
 REDIS_GET = ['get', 'hgetall',  'hmget']
 REDIS_SET = ['set', 'hmset']
